@@ -40,6 +40,10 @@ namespace ProyectoGym.Migrations
                     b.Property<float>("Precio")
                         .HasColumnType("real");
 
+                    b.Property<string>("UrlImagen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Producto");

@@ -11,8 +11,8 @@ using ProyectoGym;
 namespace ProyectoGym.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230428082813_Productos")]
-    partial class Productos
+    [Migration("20230428120903_Products")]
+    partial class Products
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,6 +42,10 @@ namespace ProyectoGym.Migrations
 
                     b.Property<float>("Precio")
                         .HasColumnType("real");
+
+                    b.Property<string>("UrlImagen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
