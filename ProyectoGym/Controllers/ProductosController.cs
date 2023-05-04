@@ -18,14 +18,19 @@ namespace ProyectoGym.Controllers
         {
             return await context.Producto.ToListAsync();
         }
-        [HttpPost]
+        [HttpGet("listadoSuplementacion")]
+        public async Task<ActionResult<List<Productos>>> GetSup()
+        {
+            return await context.Producto.Where(p => p.Tipo == "Suplementos").ToListAsync();
+        }
+        [HttpPost("añadir")]
         public async Task<ActionResult> Post(Productos producto) //<-Ejemplo de Model Binding [FromBody]
         {
-            var existeAutorConElMismoNombre = await context.Producto.AnyAsync(x => x.Nombre == producto.Nombre); //<-Booleano
+            var existeProductoConElMismoNombre = await context.Producto.AnyAsync(x => x.Nombre == producto.Nombre); //<-Booleano
 
-            if (existeAutorConElMismoNombre)
+            if (existeProductoConElMismoNombre)
             {
-                return BadRequest($"Ya existe un autor con el nombre {producto.Nombre}");
+                return BadRequest($"Ya existe un producto con el nombre {producto.Nombre}");
             }
 
             context.Add(producto);

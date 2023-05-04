@@ -7,5 +7,6 @@
         public string UrlImagen { get; set; }
         public float Precio { get; set; }
         public string Descripcion { get; set; }
+        public string Tipo { get; set; }
     }
 }
