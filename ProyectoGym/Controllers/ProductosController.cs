@@ -23,6 +23,16 @@ namespace ProyectoGym.Controllers
         {
             return await context.Producto.Where(p => p.Tipo == "Suplementos").ToListAsync();
         }
+        [HttpGet("listadoModa")]
+        public async Task<ActionResult<List<Productos>>> GetMod()
+        {
+            return await context.Producto.Where(q => q.Tipo == "Moda").ToListAsync();
+        }
+        [HttpGet("listadoEquipamiento")]
+        public async Task<ActionResult<List<Productos>>> GetEquip()
+        {
+            return await context.Producto.Where(j => j.Tipo == "Equipamiento").ToListAsync();
+        }
         [HttpPost("añadir")]
         public async Task<ActionResult> Post(Productos producto) //<-Ejemplo de Model Binding [FromBody]
         {
