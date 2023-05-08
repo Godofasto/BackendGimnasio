@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ProyectoGym.Controllers.Request;
 using ProyectoGym.Entidades;
 
 namespace ProyectoGym.Controllers
@@ -37,6 +38,19 @@ namespace ProyectoGym.Controllers
         {
             return await context.Producto.Where(j => j.Tipo == "Equipamiento").ToListAsync();
         }
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        [HttpPost("RetornarTodo")]
+        public async Task<ActionResult<List<Productos>>> RetornarTodo(RetornarTodoRequest dato) //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
+        {
+            if(dato.TipoDato == "Todo")
+            {
+                return await context.Producto.ToListAsync();
+            }
+            
+            return await context.Producto.Where(p => p.Tipo == dato.TipoDato).ToListAsync();
+
+        }
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
         [HttpPost("añadir")]
         public async Task<ActionResult> Post(Productos producto) //<-Ejemplo de Model Binding [FromBody]
@@ -51,6 +65,18 @@ namespace ProyectoGym.Controllers
             context.Add(producto);
             await context.SaveChangesAsync();
             return Ok();
+        }
+        [HttpDelete("{Id}")]
+        public async Task<ActionResult> DeleteProd(int Id)
+        {
+            var producto = await context.Producto.FindAsync(Id);
+            if(producto== null)
+            {
+                return NotFound();
+            }
+            context.Producto.Remove(producto);
+            await context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
