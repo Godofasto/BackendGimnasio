@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProyectoGym.Services;
 using System.Text.Json.Serialization;
 
 namespace ProyectoGym
@@ -26,6 +27,9 @@ namespace ProyectoGym
             });
 
             services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
+            services.AddScoped<IProductoService, ServiceProductos>();
+            services.AddScoped<IEntrenadorService, EntrenadoresService>();
 
             object value = services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

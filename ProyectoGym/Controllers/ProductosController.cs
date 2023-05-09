@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProyectoGym.Controllers.Request;
 using ProyectoGym.Entidades;
+using ProyectoGym.Services;
 
 namespace ProyectoGym.Controllers
 {
@@ -9,46 +10,48 @@ namespace ProyectoGym.Controllers
     [Route("api/productos")]
     public class ProductosController : ControllerBase
     {
+        private readonly IProductoService ServiceProductos;
         public readonly ApplicationDbContext context;
-        public ProductosController(ApplicationDbContext context)
+        public ProductosController(ApplicationDbContext context, IProductoService ServiceProductos)
         {
             this.context = context;
+            this.ServiceProductos = ServiceProductos;
         }
 
-        [HttpGet("listado")]
-        public async Task<ActionResult<List<Productos>>> Get()
-        {
-            return await context.Producto.ToListAsync();
-        }
+        //[HttpGet("listado")]
+        //public async Task<ActionResult<List<Productos>>> Get()
+        //{
+        //    return await context.Producto.ToListAsync();
+        //}
 
-        [HttpGet("listadoSuplementacion")]
-        public async Task<ActionResult<List<Productos>>> GetSup()
-        {
-            return await context.Producto.Where(p => p.Tipo == "Suplementos").ToListAsync();
-        }
+        //[HttpGet("listadoSuplementacion")]
+        //public async Task<ActionResult<List<Productos>>> GetSup()
+        //{
+        //    return await context.Producto.Where(p => p.Tipo == "Suplementos").ToListAsync();
+        //}
 
-        [HttpGet("listadoModa")]
-        public async Task<ActionResult<List<Productos>>> GetMod()
-        {
-            return await context.Producto.Where(q => q.Tipo == "Moda").ToListAsync();
-        }
+        //[HttpGet("listadoModa")]
+        //public async Task<ActionResult<List<Productos>>> GetMod()
+        //{
+        //    return await context.Producto.Where(q => q.Tipo == "Moda").ToListAsync();
+        //}
 
-        [HttpGet("listadoEquipamiento")]
-        public async Task<ActionResult<List<Productos>>> GetEquip()
-        {
-            return await context.Producto.Where(j => j.Tipo == "Equipamiento").ToListAsync();
-        }
+        //[HttpGet("listadoEquipamiento")]
+        //public async Task<ActionResult<List<Productos>>> GetEquip()
+        //{
+        //    return await context.Producto.Where(j => j.Tipo == "Equipamiento").ToListAsync();
+        //}
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         [HttpPost("RetornarTodo")]
-        public async Task<ActionResult<List<Productos>>> RetornarTodo(RetornarTodoRequest dato) //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
+        public async Task<ActionResult<List<Productos>>> RetornarTodo([FromBody] RetornarTodoRequest dato) //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
         {
-            if(dato.TipoDato == "Todo")
-            {
-                return await context.Producto.ToListAsync();
-            }
-            
-            return await context.Producto.Where(p => p.Tipo == dato.TipoDato).ToListAsync();
-
+            //if(!string.IsNullOrEmpty(dato.TipoDato))
+            //{
+            //    return await context.Producto.Where(p => p.Tipo == dato.TipoDato).ToListAsync();
+            //}
+            //return await context.Producto.ToListAsync();
+            var productos = await ServiceProductos.RetornarTodo(dato.TipoDato); //Viene del servicio que he creado para esto, acostumbrarme a hacerlo asi, y no olvidarme de meterlo en el startup.cs que si no no va
+            return Ok(productos);
         }
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
