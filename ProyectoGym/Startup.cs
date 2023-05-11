@@ -30,6 +30,7 @@ namespace ProyectoGym
 
             services.AddScoped<IProductoService, ServiceProductos>();
             services.AddScoped<IEntrenadorService, EntrenadoresService>();
+            services.AddScoped<IEspaldaBicepsService, EspaldaBicepsService>();
 
             object value = services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("defaultConnection")));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
