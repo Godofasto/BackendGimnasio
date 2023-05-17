@@ -16,5 +16,6 @@ namespace ProyectoGym
         public DbSet<EjerciciosEspaldaBiceps> EjerciciosEspaldaBiceps { get; set; }
         public DbSet<EjerciciosPechoTriceps> EjerciciosPechoTriceps { get; set; }
         public DbSet<EjerciciosPiernaHombro> EjerciciosPiernaHombro { get; set; }
+        public DbSet<Usuarios> Usuarios { get; set; }
     }
 }
