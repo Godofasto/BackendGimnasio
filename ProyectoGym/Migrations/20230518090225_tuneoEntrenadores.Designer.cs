@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoGym;
 
@@ -10,9 +11,11 @@ using ProyectoGym;
 namespace ProyectoGym.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230518090225_tuneoEntrenadores")]
+    partial class tuneoEntrenadores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -161,26 +164,6 @@ namespace ProyectoGym.Migrations
                     b.ToTable("Entrenador");
                 });
 
-            modelBuilder.Entity("ProyectoGym.Entidades.Perfiles", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("AñadirEntrenador")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Perfiles");
-                });
-
             modelBuilder.Entity("ProyectoGym.Entidades.Productos", b =>
                 {
                     b.Property<int>("Id")
@@ -233,9 +216,6 @@ namespace ProyectoGym.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PerfilId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Sexo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -245,20 +225,7 @@ namespace ProyectoGym.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PerfilId");
-
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("ProyectoGym.Entidades.Usuarios", b =>
-                {
-                    b.HasOne("ProyectoGym.Entidades.Perfiles", "Perfil")
-                        .WithMany()
-                        .HasForeignKey("PerfilId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Perfil");
                 });
 #pragma warning restore 612, 618
         }
