@@ -7,6 +7,7 @@ using ProyectoGym.Entidades;
 using ProyectoGym.Services;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace ProyectoGym.Controllers
 {
@@ -45,6 +46,21 @@ namespace ProyectoGym.Controllers
                     return new ObjectResult("La dirección de correo electrónico no es válida")
                     {
                         StatusCode = StatusCodes.Status417ExpectationFailed
+                    };
+                }
+                try
+                {
+                    string patron = @"^(?:(?:\+|00)34|0)?[6789]\d{8}$";
+                    Regex regex = new Regex(patron);
+                    string telefonoString = (usuario.Tlf).ToString();
+                    bool esValido = regex.IsMatch(telefonoString);
+                    
+                }
+                catch(FormatException)
+                {
+                    return new ObjectResult("El número de teléfono no es válido")
+                    {
+                        StatusCode = StatusCodes.Status406NotAcceptable
                     };
                 }
             }
