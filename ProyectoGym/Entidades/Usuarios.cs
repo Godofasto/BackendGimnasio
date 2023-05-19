@@ -9,6 +9,7 @@
         public string Contrasena { get; set; }
         public string Sexo { get; set; }
         public int PerfilId { get; set; } // Nueva propiedad FK
-        public Perfiles Perfil { get; set; } // Propiedad de navegación
+         // Propiedad de navegación
+
     }
 }

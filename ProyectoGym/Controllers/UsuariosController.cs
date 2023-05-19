@@ -15,9 +15,11 @@ namespace ProyectoGym.Controllers
     public class UsuariosController : ControllerBase
     {
         public readonly ApplicationDbContext context;
-        public UsuariosController(ApplicationDbContext context)
+        public readonly IUsuariosService UsuariosService;
+        public UsuariosController(ApplicationDbContext context, IUsuariosService UsuariosService)
         {
             this.context = context;
+            this.UsuariosService = UsuariosService;
         }
         [HttpPost("añadir")]
         public async Task<ActionResult> Post(Usuarios usuario) //<-Ejemplo de Model Binding [FromBody]
@@ -63,6 +65,17 @@ namespace ProyectoGym.Controllers
             }
             Console.WriteLine("bien");
             return Ok();
+        }
+        [HttpPost("Recoger")]
+        public async Task<ActionResult<List<Usuarios>>> RetornarTodo() //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
+        {
+            //if(!string.IsNullOrEmpty(dato.TipoDato))
+            //{
+            //    return await context.Producto.Where(p => p.Tipo == dato.TipoDato).ToListAsync();
+            //}
+            //return await context.Producto.ToListAsync();
+            var usuarios = await UsuariosService.RetornarTodo(); //Viene del servicio que he creado para esto, acostumbrarme a hacerlo asi, y no olvidarme de meterlo en el startup.cs que si no no va
+            return Ok(usuarios);
         }
     }
 }
