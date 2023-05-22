@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoGym;
 
@@ -10,9 +11,11 @@ using ProyectoGym;
 namespace ProyectoGym.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230522103521_Citas1")]
+    partial class Citas1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,27 +24,6 @@ namespace ProyectoGym.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ProyectoGym.Entidades.Actividades", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Actividades");
-                });
-
             modelBuilder.Entity("ProyectoGym.Entidades.Citas", b =>
                 {
                     b.Property<int>("Id")
@@ -49,9 +31,6 @@ namespace ProyectoGym.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ActividadesId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Fecha")
                         .IsRequired()
@@ -65,8 +44,6 @@ namespace ProyectoGym.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActividadesId");
 
                     b.HasIndex("UsuariosId");
 
@@ -304,12 +281,6 @@ namespace ProyectoGym.Migrations
 
             modelBuilder.Entity("ProyectoGym.Entidades.Citas", b =>
                 {
-                    b.HasOne("ProyectoGym.Entidades.Actividades", null)
-                        .WithMany()
-                        .HasForeignKey("ActividadesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("ProyectoGym.Entidades.Usuarios", null)
                         .WithMany()
                         .HasForeignKey("UsuariosId")
