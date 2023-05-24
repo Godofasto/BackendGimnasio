@@ -5,7 +5,7 @@ namespace ProyectoGym.Services
 {
     public interface ICitasService
     {
-        Task<List<Citas>> RetornarTodasCitas();
+        Task<List<Citas>> RetornarTodasCitas(int UsuarioId);
         Task AgregarCitas(Citas citas);
     }
     public class CitasService : ICitasService
@@ -16,9 +16,9 @@ namespace ProyectoGym.Services
         {
             this.context = context;
         }
-        public async Task<List<Citas>> RetornarTodasCitas()
+        public async Task<List<Citas>> RetornarTodasCitas(int usuarioId)
         {
-            return await context.Citas.ToListAsync();
+                return await context.Citas.Where(p => p.UsuariosId == usuarioId).ToListAsync();
         }
         public async Task AgregarCitas(Citas citas)
         {

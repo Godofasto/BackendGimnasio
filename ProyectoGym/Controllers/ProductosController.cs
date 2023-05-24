@@ -81,5 +81,27 @@ namespace ProyectoGym.Controllers
             await context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpPut("editar/{Id}")]
+        public async Task<ActionResult> EditarProducto(int Id, [FromBody] Productos productoActualizado)
+        {
+            var producto = await context.Producto.FindAsync(Id);
+
+            if (producto == null)
+            {
+                return NotFound();
+            }
+
+            producto.Nombre = productoActualizado.Nombre;
+            producto.UrlImagen = productoActualizado.UrlImagen;
+            producto.Precio = productoActualizado.Precio;
+            producto.Descripcion = productoActualizado.Descripcion;
+            producto.Tipo = productoActualizado.Tipo;
+
+            context.Producto.Update(producto);
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
+        
     }
 }

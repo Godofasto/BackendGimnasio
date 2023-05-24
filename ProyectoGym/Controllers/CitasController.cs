@@ -19,14 +19,14 @@ namespace ProyectoGym.Controllers
             this.CitasService = CitasService;
         }
         [HttpPost("RetornarTodasCitas")]
-        public async Task<ActionResult<List<Citas>>> RetornarTodasCitas() //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
+        public async Task<ActionResult<List<Citas>>> RetornarTodasCitas([FromBody] RetornarCitas Dato) //Meterlo como un objeto y arreglarlo, ver como acceder al atributo del objeto
         {
             //if(!string.IsNullOrEmpty(dato.TipoDato))
             //{
             //    return await context.Producto.Where(p => p.Tipo == dato.TipoDato).ToListAsync();
             //}
             //return await context.Producto.ToListAsync();
-            var citas = await CitasService.RetornarTodasCitas(); //Viene del servicio que he creado para esto, acostumbrarme a hacerlo asi, y no olvidarme de meterlo en el startup.cs que si no no va
+            var citas = await CitasService.RetornarTodasCitas(Dato.UsuariosId); //Viene del servicio que he creado para esto, acostumbrarme a hacerlo asi, y no olvidarme de meterlo en el startup.cs que si no no va
             return Ok(citas);
         }
 
