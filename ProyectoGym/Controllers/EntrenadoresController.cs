@@ -60,5 +60,28 @@ namespace ProyectoGym.Controllers
             await context.SaveChangesAsync();
             return NoContent();
         }
+        [HttpPut("editar/{Id}")]
+        public async Task<ActionResult> EditarEntrenadores(int Id, [FromBody] Entrenadores entrenadorActualizado)
+        {
+            var entrenador = await context.Entrenador.FindAsync(Id);
+
+            if (entrenador == null)
+            {
+                return NotFound();
+            }
+
+            entrenador.Nombre = entrenadorActualizado.Nombre;
+            entrenador.urlImagen = entrenadorActualizado.urlImagen;
+            entrenador.horarioDias = entrenadorActualizado.horarioDias;
+            entrenador.horarioHoras = entrenadorActualizado.horarioHoras;
+            entrenador.precioMensual = entrenadorActualizado.precioMensual;
+            entrenador.numeroTelefono = entrenadorActualizado.numeroTelefono;
+            entrenador.Descripcion = entrenadorActualizado.Descripcion;
+
+            context.Entrenador.Update(entrenador);
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
