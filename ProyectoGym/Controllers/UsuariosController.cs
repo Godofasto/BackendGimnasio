@@ -93,5 +93,6 @@ namespace ProyectoGym.Controllers
             var usuarios = await UsuariosService.RetornarTodo(); //Viene del servicio que he creado para esto, acostumbrarme a hacerlo asi, y no olvidarme de meterlo en el startup.cs que si no no va
             return Ok(usuarios);
         }
+
     }
 }

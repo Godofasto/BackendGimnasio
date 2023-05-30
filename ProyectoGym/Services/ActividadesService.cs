@@ -8,7 +8,10 @@ namespace ProyectoGym.Services
         Task<List<Actividades>> RetornarTodasActividades();
         Task<bool> ExisteActividadConElMismoNombre(string nombre);
         Task AgregarActividad(Actividades actividad);
+        Task<List<ActividadesConEntrenador>> RetornarActividadesConEntrenadores();
+
     }
+    
     public class ActividadesService : IActividadesService
     {
         private readonly ApplicationDbContext context;
@@ -31,5 +34,24 @@ namespace ProyectoGym.Services
             context.Add(actividad);
             await context.SaveChangesAsync();
         }
+        public class ActividadConEntrenador
+        {
+            public Actividades Actividad { get; set; }
+            public Entrenadores Entrenador { get; set; }
+        }
+
+        public async Task<List<ActividadesConEntrenador>> RetornarActividadesConEntrenadores()
+        {
+            var actividadesConEntrenador = await (from a in context.Actividades
+                                                    join e in context.Entrenador on a.IdEntrenador equals e.Id
+                                                    select new ActividadesConEntrenador
+                                                    {
+                                                        Actividad = a,
+                                                        Entrenador = e
+                                                    }).ToListAsync();
+
+            return actividadesConEntrenador;
+        }
+
     }
 }

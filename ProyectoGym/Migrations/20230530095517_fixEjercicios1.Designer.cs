@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProyectoGym;
 
@@ -10,9 +11,11 @@ using ProyectoGym;
 namespace ProyectoGym.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230530095517_fixEjercicios1")]
+    partial class fixEjercicios1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,16 +36,11 @@ namespace ProyectoGym.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("IdEntrenador")
-                        .HasColumnType("int");
-
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdEntrenador");
 
                     b.ToTable("Actividades");
                 });
@@ -342,15 +340,6 @@ namespace ProyectoGym.Migrations
                     b.HasIndex("PerfilId");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("ProyectoGym.Entidades.Actividades", b =>
-                {
-                    b.HasOne("ProyectoGym.Entidades.Entrenadores", null)
-                        .WithMany()
-                        .HasForeignKey("IdEntrenador")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProyectoGym.Entidades.Citas", b =>

@@ -20,6 +20,7 @@ namespace ProyectoGym
         public DbSet<Perfiles> Perfiles { get; set; }
         public DbSet<Citas> Citas { get; set; }
         public DbSet<Actividades> Actividades { get; set; }
+        public DbSet<Ejercicios> Ejercicios { get; set; }
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
         //{
         //    modelBuilder.Entity<Usuarios>()
@@ -41,6 +42,10 @@ namespace ProyectoGym
                 .HasOne<Actividades>()
                 .WithMany()
                 .HasForeignKey(q => q.ActividadesId);
+            modelBuilder.Entity<Actividades>()
+                .HasOne<Entrenadores>()
+                .WithMany()
+                .HasForeignKey(t => t.IdEntrenador);
 
         }
     }
