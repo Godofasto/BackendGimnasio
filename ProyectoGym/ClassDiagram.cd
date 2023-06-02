@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="ProyectoGym.Entidades.Actividades">
+    <Position X="9.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAgAABAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Entidades\Actividades.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.ActividadesConEntrenador">
+    <Position X="6.75" Y="5.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAEA=</HashCode>
+      <FileName>Entidades\ActividadesConEntrenador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Citas">
+    <Position X="12" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>ACACAAAAAAAAAAEAAAAAgAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Entidades\Citas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Ejercicios">
+    <Position X="9.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAACAAACAAAAAAAAAEAAgAAAAAAAAAAAAAAAAAAIAAQ=</HashCode>
+      <FileName>Entidades\Ejercicios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Entrenadores">
+    <Position X="6.75" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>gAACAEAAAAAAAAAAAACAgAABAAAAAAAAACAAAAAAQAA=</HashCode>
+      <FileName>Entidades\Entrenadores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Perfiles">
+    <Position X="11.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entidades\Perfiles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Productos">
+    <Position X="9.5" Y="3" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAIAAAAAAAAAAAAAAgAARAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Entidades\Productos.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProyectoGym.Entidades.Usuarios">
+    <Position X="12" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAACAAAAIAgAAAgAAAAAAgAAAABAAAAAAAAAA=</HashCode>
+      <FileName>Entidades\Usuarios.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
